@@ -88,7 +88,7 @@ npx playwright show-report
 
 ## ⚙️ Continuous Integration
 
-A GitHub Actions workflow (`.github/workflows/playwright.yml`) is configured to run the test suite automatically on every push to `main`.
+This project uses GitHub Actions to automatically run the full Playwright test suite on every push to `main` — [verified passing](https://github.com/mktabular/playwright-qa-portfolio/actions).
 
 ---
 
