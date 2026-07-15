@@ -86,7 +86,7 @@ test('homepage loads and displays books', async ({ page }) => {
   expect(count).toBeGreaterThan(0);
 });
 
-test('every book has a title and a price', async ({ page }) => {
+test('every book has a title', async ({ page }) => {
   
   const homePage = new HomePage(page);
   await homePage.goto();
@@ -135,5 +135,21 @@ test('clicking next page shows different books', async ({ page }) => {
 
   // The two arrays should NOT be identical — proves the page actually changed
   expect(secondPageTitles).not.toEqual(firstPageTitles);
+});
+
+test('selecting a category filters the book results', async ({ page }) => {
+  
+  const homePage = new HomePage(page);
+  await homePage.goto();
+
+  // Click the "Travel" category in the sidebar
+  await homePage.openCategoryByName('Travel');
+
+  // The page header should now say "Travel" to confirm we're on the right filtered page
+  await expect(homePage.pageTitle).toContainText('Travel');
+
+  // There should still be at least 1 book shown in this category
+  const count = await homePage.getBookCount();
+  expect(count).toBeGreaterThan(0);
 });
 

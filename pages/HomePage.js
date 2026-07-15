@@ -14,6 +14,8 @@ class HomePage {
     // no more retyping 'article.product_pod' in every test file.
     this.bookCards = page.locator('article.product_pod');
     this.nextPageLink = page.locator('.next a');
+    this.categoryLinks = page.locator('.side_categories ul li ul li a');
+    this.pageTitle = page.locator('.page-header h1');
   }
 
   // This method navigates the browser to the homepage.
@@ -52,6 +54,16 @@ class HomePage {
   // (the last page won't have one)
   async hasNextPage() {
     return this.nextPageLink.isVisible();
+  }
+
+   // Clicks a category link in the sidebar, matched by its visible text
+  async openCategoryByName(categoryName) {
+    await this.categoryLinks.filter({ hasText: categoryName }).click();
+  }
+  
+   // Clicks into a specific book's detail page, by its position in the list (0 = first book)
+  async openBookByIndex(index) {
+    await this.bookCards.nth(index).locator('h3 a').click();
   }
 
 }
